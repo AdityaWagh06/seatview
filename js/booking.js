@@ -43,6 +43,7 @@ function renderMap() {
   $('map').innerHTML = h;
   $('mapWrap').classList.toggle('heat', state.heat);
 }
+$('heatBtn').addEventListener('click', () => { state.heat = !state.heat; $('heatBtn').setAttribute('aria-pressed', state.heat); $('mapWrap').classList.toggle('heat', state.heat); });
 
 function toggleSeat(id) {
   if (state.sold.has(id)) return false;
