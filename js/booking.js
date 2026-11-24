@@ -23,3 +23,23 @@ function renderPickers() {
 $('dates').addEventListener('click', e => { const b = e.target.closest('.date'); if (!b) return; state.date = +b.dataset.i; state.selected = []; refreshAll(); });
 $('shows').addEventListener('click', e => { const b = e.target.closest('.show'); if (!b) return; state.show = +b.dataset.i; state.selected = []; refreshAll(); });
 function refreshAll() { genSold(); renderPickers(); renderMap(); hidePop(); updateBar(); if (T) T.refreshSeats(); }
+
+/* ---------------- seat map ---------------- */
+function renderMap() {
+  let h = '';
+  for (let ri = 11; ri >= 0; ri--) {
+    const tr = tierOf(ri);
+    if (ri === 11 || ri === 9 || ri === 3) h += `<div class="tier"><span>${TIERS[tr].name}</span><b>₹${TIERS[tr].price}</b></div>`;
+    h += `<div class="srow"><span class="rl">${ROWS[ri]}</span>`;
+    for (let n = 1; n <= PER_ROW; n++) {
+      if (n === 5 || n === 13) h += '<span class="aisle"></span>';
+      const id = idOf(ri, n), sold = state.sold.has(id), sel = state.selected.includes(id);
+      const q = scoreColor(metrics(ri, n).s);
+      h += `<button class="seat${tr === 'recliner' ? ' rec' : ''}${sold ? ' sold' : ''}${sel ? ' sel' : ''}" style="--q:${q}" data-id="${id}" ${sold ? 'disabled' : ''} aria-label="Row ${ROWS[ri]} seat ${n}, ${TIERS[tr].name} ₹${TIERS[tr].price}${sold ? ', sold' : sel ? ', selected' : ''}">${n}</button>`;
+    }
+    h += `<span class="rl">${ROWS[ri]}</span></div>`;
+  }
+  h += '<div class="screen">All eyes this way</div>';
+  $('map').innerHTML = h;
+  $('mapWrap').classList.toggle('heat', state.heat);
+}
