@@ -43,3 +43,44 @@ function renderMap() {
   $('map').innerHTML = h;
   $('mapWrap').classList.toggle('heat', state.heat);
 }
+
+function toggleSeat(id) {
+  if (state.sold.has(id)) return false;
+  const i = state.selected.indexOf(id);
+  if (i >= 0) state.selected.splice(i, 1);
+  else { if (state.selected.length >= 10) state.selected.shift(); state.selected.push(id); }
+  document.querySelectorAll('.seat').forEach(b => b.classList.toggle('sel', state.selected.includes(b.dataset.id)));
+  updateBar(); if (T) T.refreshSeats();
+  return state.selected.includes(id);
+}
+$('map').addEventListener('click', e => {
+  const b = e.target.closest('.seat'); if (!b || b.disabled) return;
+  const on = toggleSeat(b.dataset.id);
+  if (on) showPop(b); else hidePop();
+});
+
+const pop = $('pop');
+function showPop(btn) {
+  const id = btn.dataset.id, [ri, n] = parseId(id), tr = TIERS[tierOf(ri)], m = metrics(ri, n);
+  pop.style.setProperty('--q', scoreColor(m.s));
+  pop.innerHTML = `<button class="x" aria-label="Close">×</button>
+    <div class="pt"><strong>Row ${ROWS[ri]} · ${n}</strong><span>₹${tr.price}</span></div>
+    <div class="ps">${tr.name} · view score <b>${m.s}</b> · ${m.verdict}</div>
+    <button class="btn primary full" data-preview="${id}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Preview view from here</button>`;
+  pop.hidden = false;
+  const wrap = $('mapWrap'), wr = wrap.getBoundingClientRect(), br = btn.getBoundingClientRect();
+  const w = pop.offsetWidth, ph = pop.offsetHeight;
+  const cx = br.left - wr.left + wrap.scrollLeft + br.width / 2;
+  let left = Math.max(8, Math.min(cx - w / 2, wrap.scrollWidth - w - 8));
+  let top = br.top - wr.top + wrap.scrollTop - ph - 10;
+  pop.style.left = left + 'px'; pop.style.top = Math.max(4, top) + 'px';
+  pop.style.setProperty('--ax', (cx - left) + 'px');
+  pop._btn = btn;
+}
+function hidePop() { pop.hidden = true; }
+pop.addEventListener('click', e => {
+  if (e.target.closest('.x')) return hidePop();
+  const p = e.target.closest('[data-preview]');
+  if (p) openPreview(p.dataset.preview, pop._btn.getBoundingClientRect());
+});
+document.addEventListener('click', e => { if (!pop.hidden && !pop.contains(e.target) && !e.target.closest('.seat')) hidePop(); });

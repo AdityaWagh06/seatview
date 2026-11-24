@@ -32,3 +32,13 @@
 .legend i.s{background:var(--accent);border-color:var(--accent)}
 .legend i.x{background:transparent;border-color:#20243a;background-image:linear-gradient(135deg,transparent 45%,#2a2f48 45% 55%,transparent 55%)}
 .legend i.r{border-color:var(--leather)}
+
+/* popover */
+.pop{position:absolute;z-index:5;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px;width:230px;box-shadow:0 14px 40px rgba(0,0,0,.55)}
+.pop::after{content:"";position:absolute;left:var(--ax,50%);bottom:-7px;width:12px;height:12px;background:var(--surface-2);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.pop .pt{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pop .pt strong{font-family:var(--f-display);font-size:22px;font-weight:800;letter-spacing:.03em}
+.pop .pt span{font-family:var(--f-mono);font-size:13px}
+.pop .ps{font-size:12px;color:var(--muted);margin:2px 0 10px}
+.pop .ps b{color:var(--q,var(--fg));font-weight:600}
+.pop .x{position:absolute;top:6px;right:6px;border:0;background:none;color:var(--muted);width:26px;height:26px;font-size:18px;line-height:1}
