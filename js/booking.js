@@ -95,3 +95,9 @@ function updateBar() {
   $('barTotal').textContent = '₹' + total.toLocaleString('en-IN');
   if (T) T.updateBookBtn();
 }
+
+$('barPay').addEventListener('click', () => {
+  $('dlgText').textContent = `${state.selected.join(', ')} for Avengers: Doomsday, ${DATES[state.date][0]} ${DATES[state.date][1]} Dec at ${SHOWS[state.show]}. Total ${$('barTotal').textContent}. This is a demo, so no payment was taken.`;
+  $('dlg').hidden = false;
+});
+$('dlgOk').addEventListener('click', () => { $('dlg').hidden = true; });
