@@ -1,0 +1,15 @@
+/* film header */
+.film{display:grid;grid-template-columns:132px 1fr;gap:20px;align-items:center;padding-block:14px 22px;border-bottom:1px solid var(--line)}
+.poster{aspect-ratio:2/3;max-width:100%;border-radius:6px;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 50% 42%, transparent 26%, rgba(94,255,184,.55) 29%, rgba(94,255,184,.08) 34%, transparent 44%),
+  radial-gradient(ellipse at 50% 120%, #2a1440 0%, transparent 60%), linear-gradient(180deg,#0c1a16,#06070c);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.poster b{font-family:var(--f-display);font-weight:900;font-size:20px;line-height:.9;letter-spacing:.08em;color:#dfe3ec}
+.poster i{font-style:normal;font-family:var(--f-display);font-weight:800;color:var(--portal);font-size:15px;letter-spacing:.14em}
+.film h1{font-family:var(--f-display);font-weight:900;font-size:clamp(34px,6vw,58px);line-height:.95;letter-spacing:.02em;margin:0;text-transform:uppercase;text-wrap:balance}
+.film h1 em{font-style:normal;color:var(--portal)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:13px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--fg)}
+.callout{margin-top:14px;font-size:13px;color:var(--fg);display:flex;gap:10px;align-items:flex-start;max-width:60ch}
+.callout svg{flex:none;color:var(--accent);margin-top:2px}
