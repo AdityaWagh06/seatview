@@ -1,0 +1,10 @@
+/* pickers */
+.pick{padding-block:18px 6px;display:grid;gap:14px}
+.label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.row-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.date,.show{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;text-align:center;min-width:64px}
+.date small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.date strong{font-family:var(--f-display);font-size:22px;font-weight:800}
+.show{font-family:var(--f-mono);font-size:14px;padding:10px 14px}
+.show small{display:block;font-family:var(--f-body);font-size:11px;color:var(--muted)}
+.date[aria-pressed="true"],.show[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface))}
