@@ -85,3 +85,13 @@ pop.addEventListener('click', e => {
   if (p) openPreview(p.dataset.preview, pop._btn.getBoundingClientRect());
 });
 document.addEventListener('click', e => { if (!pop.hidden && !pop.contains(e.target) && !e.target.closest('.seat')) hidePop(); });
+
+function updateBar() {
+  const sel = state.selected;
+  $('bar').classList.toggle('on', sel.length > 0);
+  const total = sel.reduce((a, id) => a + TIERS[tierOf(parseId(id)[0])].price, 0);
+  $('barCount').textContent = `${sel.length} seat${sel.length === 1 ? '' : 's'} · ${DATES[state.date][0]} ${DATES[state.date][1]} Dec, ${SHOWS[state.show]}`;
+  $('barSeats').textContent = sel.length ? sel.join(', ') : '—';
+  $('barTotal').textContent = '₹' + total.toLocaleString('en-IN');
+  if (T) T.updateBookBtn();
+}

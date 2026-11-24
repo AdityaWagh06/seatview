@@ -1,4 +1,4 @@
 'use strict';
 
 /* boot */
-genSold(); renderPickers(); renderMap();
+genSold(); renderPickers(); renderMap(); updateBar();
