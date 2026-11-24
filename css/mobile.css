@@ -1,0 +1,15 @@
+/* phones */
+.pick > div{min-width:0}
+@media (max-width:700px){
+  .film{grid-template-columns:92px 1fr;gap:14px}
+  .callout{display:none}
+  .card{width:auto;right:max(14px,env(safe-area-inset-right,0px));top:calc(64px + env(safe-area-inset-top,0px));padding:10px 12px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+  .card .score{margin:0}
+  .card .stats{grid-template-columns:1fr 1fr;gap:4px 10px;font-size:11px}
+  .card .stats div{padding-top:3px}
+  .card .tip{display:none}
+  .pv-title strong{font-size:18px}
+  .pbtn .t{display:none}
+  .pv-hint{display:none}
+  .mseat{width:7px;height:7px}
+}
